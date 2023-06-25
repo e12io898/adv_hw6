@@ -7,18 +7,23 @@ from main import uniq_id, geo_log, max_sales, yad_api, data
 # Задача №1:
 
 test_data = (data['uniq_id'][0], data['uniq_id'][1])
+
 @pytest.mark.parametrize('ids, exepted', [test_data])
 def test_uniq_id(ids, exepted):
     res = uniq_id(ids)
     assert res == exepted
 
+
 test_data = (data['geo_log'][0], data['geo_log'][1])
+
 @pytest.mark.parametrize('geo_logs, exepted', [test_data])
 def test_geo_log(geo_logs, exepted):
     res = geo_log(geo_logs)
     assert res == exepted
 
+
 test_data = (data['max_sales'][0], data['max_sales'][1])
+
 @pytest.mark.parametrize('stats, exepted', [test_data])
 def test_max_sales(stats, exepted):
     res = max_sales(stats)
