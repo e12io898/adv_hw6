@@ -1,60 +1,31 @@
 import pytest
-from main import uniq_id, geo_log, max_sales, yad_api
-from unittest import TestCase
 import configparser
+from unittest import TestCase
+from main import uniq_id, geo_log, max_sales, yad_api, data
 
-# Задача №1 unit-tests
 
-@pytest.mark.parametrize(
-    'ids, exepted', [
-        ({'user1': [213, 213, 213, 15, 213],
-          'user2': [54, 54, 119, 119, 119],
-          'user3': [213, 98, 98, 35]},
-         {98, 35, 15, 213, 54, 119})
-    ]
-)
+# Задача №1:
+
+test_data = (data['uniq_id'][0], data['uniq_id'][1])
+@pytest.mark.parametrize('ids, exepted', [test_data])
 def test_uniq_id(ids, exepted):
     res = uniq_id(ids)
     assert res == exepted
 
-
-@pytest.mark.parametrize(
-    'geo_logs, exepted', [
-        ([{'visit1': ['Москва', 'Россия']},
-          {'visit2': ['Дели', 'Индия']},
-          {'visit3': ['Владимир', 'Россия']},
-          {'visit4': ['Лиссабон', 'Португалия']},
-          {'visit5': ['Париж', 'Франция']},
-          {'visit6': ['Лиссабон', 'Португалия']},
-          {'visit7': ['Тула', 'Россия']},
-          {'visit8': ['Тула', 'Россия']},
-          {'visit9': ['Курск', 'Россия']},
-          {'visit10': ['Архангельск', 'Россия']}],
-         ['visit1: Москва, Россия',
-          'visit3: Владимир, Россия',
-          'visit7: Тула, Россия',
-          'visit8: Тула, Россия',
-          'visit9: Курск, Россия',
-          'visit10: Архангельск, Россия'])
-    ]
-)
+test_data = (data['geo_log'][0], data['geo_log'][1])
+@pytest.mark.parametrize('geo_logs, exepted', [test_data])
 def test_geo_log(geo_logs, exepted):
     res = geo_log(geo_logs)
     assert res == exepted
 
-
-@pytest.mark.parametrize(
-    'stats, exepted', [
-        ({'facebook': 55, 'yandex': 120, 'vk': 115,
-          'google': 99, 'email': 42, 'ok': 98}, 'yandex')
-    ]
-)
+test_data = (data['max_sales'][0], data['max_sales'][1])
+@pytest.mark.parametrize('stats, exepted', [test_data])
 def test_max_sales(stats, exepted):
     res = max_sales(stats)
     assert res == exepted
 
 
-# Задача №2 Автотест API Яндекса
+# Задача №2:
 
 config = configparser.ConfigParser()
 config.read('token.ini')
